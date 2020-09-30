@@ -1,25 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+
+import React, { useEffect, useState } from "react";
+
+import { BOARDS_DATA } from "./DB";
+import BoardComponent from "./components/BoardComponent";
 
 function App() {
+  const [loading, setLoading] = useState(true);
+  const [boards, setBoards] = useState([]);
+
+  useEffect(() => {
+    setBoards(BOARDS_DATA);
+    setLoading(false);
+  });
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      {boards.map((board) => {
+        const { id, title, writer, content } = board;
+        return (
+          <BoardComponent
+            id={id}
+            title={title}
+            writer={writer}
+            content={content}
+          />
+        );
+      })}
+    </>
   );
 }
 
