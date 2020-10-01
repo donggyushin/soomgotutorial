@@ -1,12 +1,16 @@
 import React from "react";
 
-const BoardComponent = ({ id, title, content, writer }) => {
+const BoardComponent = ({
+  id,
+  title,
+  content,
+  writer,
+  onBoardComponentClick,
+}) => {
   return (
-    <div>
+    <div onClick={() => onBoardComponentClick(title, writer, content, id)}>
       <span>{id}</span>
       <span>{title}</span>
-      <span>{content}</span>
-      <span>{writer}</span>
     </div>
   );
 };
